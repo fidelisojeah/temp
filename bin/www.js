@@ -19,11 +19,10 @@ app.use(webpackMiddleware(compiler, {
 }));
 app.use(webpackHotMiddleware(compiler));
 
-/*
+
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../index.html'));
 });
-*/
 
 // Serve the files on port 3000.
 app.listen(3000, () => {

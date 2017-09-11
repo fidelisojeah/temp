@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {
@@ -7,24 +6,32 @@ import {
   browserHistory,
   Switch,
 } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import { createStore, applyMiddleware } from 'redux';
 
-
-// import routes from './routes';
-import Navbar from './components/Navbar';
 import Signin from './components/pages/Signin';
 import App from './components/App';
 import './style.scss';
 
+const store = createStore(
+  (state = {}) => state,
+  applyMiddleware(thunk),
+);
+
+// import routes from './routes';
+
 
 ReactDOM.render(
-  // <Router history={browserHistory} routes={routes} />,
-  <Router history={browserHistory}>
-    <App>
-      <Switch>
-        <Route path="/signin" component={Signin} />
-      </Switch>
-    </App>
-  </Router>,
+  <Provider store={store}>
+    <Router history={browserHistory}>
+      <App>
+        <Switch>
+          <Route path="/signin" component={Signin} />
+        </Switch>
+      </App>
+    </Router>
+  </Provider>,
   document.getElementById('main'),
 );
 

@@ -7,7 +7,7 @@ const webpack = require('webpack');
 // export default {
 module.exports = {
   entry: [
-    //  'webpack-hot-middleware/client',
+    // 'webpack-hot-middleware/client',
     './src/index.jsx',
   ],
   output: {
@@ -23,6 +23,15 @@ module.exports = {
     contentBase: './dist',
     historyApiFallback: true,
     hot: true,
+    inline: true,
+    host: 'localhost', // Defaults to `localhost`
+    port: 8080, // Defaults to 8080
+    proxy: {
+      '^/api/*': {
+        target: 'http://localhost:3000/api/',
+        secure: false,
+      },
+    },
   },
   plugins: [
     new CleanWebpackPlugin(['dist']),
@@ -32,7 +41,9 @@ module.exports = {
       inject: 'body',
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
+    new webpack.HotModuleReplacementPlugin({
+      multiStep: true,
+    }),
   ],
   module: {
     rules: [

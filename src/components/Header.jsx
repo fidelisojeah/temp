@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   BrowserRouter as Router,
-  Route,
+  Link,
   browserHistory,
 } from 'react-router-dom';
 
@@ -27,9 +27,9 @@ class Header extends React.Component {
               <div className="row vertical-align">
                 <div className="col-lg-2 col-md-2">
                   <div className="header--logo q_logo">
-                    <a href="">
+                    <Link to="/">
                       <div dangerouslySetInnerHTML={{ __html: hbLogo }} />
-                    </a>
+                    </Link>
                   </div>
                 </div>
                 <div className="col-lg-10 col-md-10">
@@ -40,7 +40,7 @@ class Header extends React.Component {
           </div>
           <Hamburger />
         </header>
-      </div>
+      </div >
     );
   }
 }
